@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Update Product</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="update_product_form" (submit)="updateProduct(update_product_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Price</ion-label>
+      <ion-input type="number" formControlName="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Category</ion-label>
+      <ion-select formControlName="category">
+        <ion-select-option value="hats">Hat</ion-select-option>
+        <ion-select-option value="shirts">Shirt</ion-select-option>
+        <ion-select-option value="jackets">Jacket</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Image URL</ion-label>
+      <ion-input type="text" formControlName="img"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit">Update</ion-button>
+  </form>
+</ion-content>

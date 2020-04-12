@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>OrderList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let order of orders" (click)="goToOrder(order)">
+      <ion-label>
+        {{ order.date }}
+      </ion-label>
+      <ion-label>
+        ${{ order.total }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>OrderDetail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentAlertConfirm()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Order ID: </ion-label>{{ current_item.id }}
+    </ion-item>
+    <ion-item *ngFor="let item of items">
+      <ion-label color="primary" position="fixed">Item: </ion-label> {{ item.name }}
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Quantity: </ion-label>{{ current_item.quantity }}
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Total Price: </ion-label>{{ current_item.total }}
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Order Date: </ion-label>{{ current_item.date }}
+    </ion-item>
+  </ion-list>
+
+</ion-content>

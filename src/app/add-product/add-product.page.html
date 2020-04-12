@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>AddProduct</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="new_product_form" (submit)="createProduct(new_product_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Price</ion-label>
+      <ion-input type="number" formControlName="price" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Category</ion-label>
+      <ion-select formControlName="category" required>
+        <ion-select-option value="hats">Hat</ion-select-option>
+        <ion-select-option value="shirts">Shirt</ion-select-option>
+        <ion-select-option value="jackets">Jacket</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="pickImage()">Pick Image</ion-button>
+      <ion-label color="primary" position="floating">Image URL</ion-label>
+      <ion-input type="text" formControlName="image" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description" required></ion-input>
+    </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_product_form.valid">Create</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <!-- TODO: Hide add product button for non-owners -->
+      <ion-button (click)="openNewProductPage()">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+      <ion-button (click)="login()">
+        Login
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>ProductList</ion-title>
+  </ion-toolbar>
+  <ion-buttons slot="end">
+    <ion-button (click)="openShoppingCartPage()">
+      Shopping Cart
+    </ion-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of products" (click)="goToProduct(product)">
+      <ion-thumbnail slot="end">
+        <ion-img [src]="product.img"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ product.name }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

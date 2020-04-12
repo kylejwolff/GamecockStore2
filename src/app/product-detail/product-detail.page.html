@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ProductDetail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentAlertConfirm()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img [src]="imgfile"></ion-img>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Name: </ion-label>{{ current_item.name }}
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Price: </ion-label>${{ current_item.price }}
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Category: </ion-label>{{ current_item.category }}
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="fixed">Description: </ion-label>{{ current_item.description }}
+    </ion-item>
+  </ion-list>
+
+  <form [formGroup]="new_order_form" (submit)="addItem(new_order_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Quantity</ion-label>
+      <ion-input type="number" formControlName="quantity" required></ion-input>
+    </ion-item>
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_order_form.valid">Add to Shopping Cart</ion-button>
+  </form>
+  <ion-buttons>
+    <ion-button class="submit-btn" expand="block" (click)="updateProductPage()">Update Item</ion-button>
+  </ion-buttons>
+</ion-content>
