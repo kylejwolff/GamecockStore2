@@ -36,7 +36,10 @@
     </ion-item>
     <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_order_form.valid">Add to Shopping Cart</ion-button>
   </form>
-  <ion-buttons>
-    <ion-button class="submit-btn" expand="block" (click)="updateProductPage()">Update Item</ion-button>
-  </ion-buttons>
+
+  <ion-item>
+    <ion-grid>
+      <ion-button class="submit-btn" expand="block" (click)="updateProductPage()">Update Product</ion-button>
+    </ion-grid>
+  </ion-item>
 </ion-content>

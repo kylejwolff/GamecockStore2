@@ -12,34 +12,28 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-exports.addMessage = functions.https.onRequest(async (req, res) => {
-    const original = req.query.text;
-    const snapshot = await admin.database().ref('/messages').push({original: original});
-    res.redirect(303, snapshot.ref.toString());
-});
-
-exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
-    .onCreate((snapshot, context) => {
-        const original = snapshot.val();
-        console.log('Uppercasing', context.params.pushId, original);
-        const uppercase = original.toUpperCase();
-        return snapshot.ref.parent.child('uppercase').set(uppercase);
-    });
-
 exports.createProduct = functions.firestore
     .document('products/{itemId}')
     .onCreate((snap, context) => {
         const newValue = snap.data();
         let itemid = context.params.itemId;
 
-        const name = newValue.name;
-        console.log(name + ": new product created");
+        var name = newValue.name;
+        var patt = /ugly|messy|trash|body/;
+
+        if(patt.test(name)){
+            console.log("Sanitizing bad product name...");
+            name = "Generic New Product Name";
+        }
+
+        return snap.ref.set({
+            name: name
+        }, {merge: true});
     });
 
 exports.updateProduct = functions.firestore
     .document('products/{itemId}')
     .onUpdate((change, context) => {
-        console.log("updateItem backend ran");
         // Get an object representing the document
         // e.g. {'name': 'Marie', 'age': 66}
         const newValue = change.after.data();
@@ -48,14 +42,14 @@ exports.updateProduct = functions.firestore
         const previousValue = change.before.data();
 
         // access a particular field as you would any JS property
-        const product = admin.database().ref('/products/{itemId}');
+        var price = newValue.price;
 
-        if(newValue.name === 'ugly' || newValue.name === 'messy' || newValue.name === 'trash' || newValue.name === 'body'){
-            console.log("name filter", newValue.name, previousValue.name);
-            newValue.name = previousValue.name;
+        if(price < previousValue.price/2){
+            console.log("New price less than 50% of original: ", newValue.price, previousValue.price);
+            price = previousValue.price/2;
         }
 
         return change.after.ref.set({
-            name: newValue.name
+            price: price
           }, {merge: true});
     });
